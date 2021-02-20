@@ -3,13 +3,24 @@ import logo from './logo.svg';
 import './App.css';
 
 const App =() => {
+  const [todoText, setTodoText] = useState("");
   const [incompleteTodos, setIncompleteTodos] = useState(["あれをする", "これをする"]);
   const [completeTodos, setCompleteTodos] = useState(["おわった"]);
+
+  const onChangeTodoText = (event) => setTodoText(event.target.value);
+
+  const onClickAdd = () => {
+    if (todoText === "") return;
+    const newTodos = [...incompleteTodos, todoText];
+    setIncompleteTodos(newTodos)
+    setTodoText("");
+  };
+
   return (
     <>
       <div className="input-area">
-        <input placeholder="TODOを入力" />
-        <button>追加</button>
+        <input placeholder="TODOを入力" value={todoText} onChange={onChangeTodoText} />
+        <button onClick={onClickAdd}>追加</button>
       </div>
 
 
